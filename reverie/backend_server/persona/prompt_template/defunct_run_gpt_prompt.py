@@ -254,11 +254,6 @@ def run_gpt_prompt_generate_hourly_schedule(persona,
 
 
 
-
-
-
-
-
 def run_gpt_prompt_task_decomp(persona, 
                                task, 
                                duration, 
@@ -722,15 +717,6 @@ def run_gpt_prompt_pronunciatio(action_description, persona, verbose=False):
                       prompt_input, prompt, output)
   
   return output, [output, prompt, gpt_param, prompt_input, fail_safe]
-
-
-
-
-
-
-
-
-
 
 
 

@@ -288,12 +288,6 @@ def run_gpt_prompt_generate_hourly_schedule(persona,
   return output, [output, prompt, gpt_param, prompt_input, fail_safe]
 
 
-
-
-
-
-
-
 def run_gpt_prompt_task_decomp(persona, 
                                task, 
                                duration, 

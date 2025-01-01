@@ -270,15 +270,3 @@ def new_retrieve(persona, focal_points, n_count=30):
 
   return retrieved
 
-
-
-
-
-
-
-
-
-
-
-
-

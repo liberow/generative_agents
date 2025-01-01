@@ -130,7 +130,7 @@ class ReverieServer:
       self.personas[persona_name] = curr_persona
       self.personas_tile[persona_name] = (p_x, p_y)
       self.maze.tiles[p_y][p_x]["events"].add(curr_persona.scratch
-                                              .get_curr_event_and_desc())
+                                              .get_curr_event_and_desc()) # 每个角色的当前事件会被添加到迷宫对应格子的事件列表中。
 
     # REVERIE SETTINGS PARAMETERS:  
     # <server_sleep> denotes the amount of time that our while loop rests each
@@ -300,7 +300,7 @@ class ReverieServer:
     # e.g., ('double studio[...]:bed', None, None, None)
     # So we need to keep track of which event we added. 
     # <game_obj_cleanup> is used for that. 
-    game_obj_cleanup = dict()
+    game_obj_cleanup = dict() ### key: curr_event; value: tile
 
     # The main while loop of Reverie. 
     while (True): 
@@ -312,8 +312,8 @@ class ReverieServer:
       # frontend has done its job and moved the personas, then it will put a 
       # new environment file that matches our step count. That's when we run 
       # the content of this for loop. Otherwise, we just wait. 
-      curr_env_file = f"{sim_folder}/environment/{self.step}.json"
-      if check_if_file_exists(curr_env_file):
+      curr_env_file = f"{sim_folder}/environment/{self.step}.json" ### 这里为什么是environment，不应该是movement
+      if check_if_file_exists(curr_env_file):  ### 为什么是file 存在就执行，不存在没有逻辑 ？？？？
         # If we have an environment file, it means we have a new perception
         # input to our personas. So we first retrieve it.
         try: 
@@ -329,7 +329,7 @@ class ReverieServer:
           # object actions that were used in this cylce. 
           for key, val in game_obj_cleanup.items(): 
             # We turn all object actions to their blank form (with None). 
-            self.maze.turn_event_from_tile_idle(key, val)
+            self.maze.turn_event_from_tile_idle(key, val) 
           # Then we initialize game_obj_cleanup for this cycle. 
           game_obj_cleanup = dict()
 
@@ -337,10 +337,10 @@ class ReverieServer:
           # the frontend environment. 
           for persona_name, persona in self.personas.items(): 
             # <curr_tile> is the tile that the persona was at previously. 
-            curr_tile = self.personas_tile[persona_name]
+            curr_tile = self.personas_tile[persona_name] ### curr_tile come from ???(init) environment/step.json
             # <new_tile> is the tile that the persona will move to right now,
             # during this cycle. 
-            new_tile = (new_env[persona_name]["x"], 
+            new_tile = (new_env[persona_name]["x"],  ### new_tile come from (now read)  environment/step.json
                         new_env[persona_name]["y"])
 
             # We actually move the persona on the backend tile map here. 
@@ -351,7 +351,7 @@ class ReverieServer:
 
             # Now, the persona will travel to get to their destination. *Once*
             # the persona gets there, we activate the object action.
-            if not persona.scratch.planned_path: 
+            if not persona.scratch.planned_path:  ### 如果人物没有预定路径（planned_path），则说明角色将在当前位置执行某个操作（如与游戏对象互动）
               # We add that new object action event to the backend tile map. 
               # At its creation, it is stored in the persona's backend. 
               game_obj_cleanup[persona.scratch
@@ -610,55 +610,4 @@ if __name__ == '__main__':
 
   rs = ReverieServer(origin, target)
   rs.open_server()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

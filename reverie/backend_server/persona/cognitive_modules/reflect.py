@@ -83,7 +83,6 @@ def generate_poig_score(persona, event_type, description):
                            persona.scratch.act_description)[0]
 
 
-
 def generate_planning_thought_on_convo(persona, all_utt):
   if debug: print ("GNS FUNCTION: <generate_planning_thought_on_convo>")
   return run_gpt_prompt_planning_thought_on_convo(persona, all_utt)[0]
@@ -92,8 +91,6 @@ def generate_planning_thought_on_convo(persona, all_utt):
 def generate_memo_on_convo(persona, all_utt):
   if debug: print ("GNS FUNCTION: <generate_memo_on_convo>")
   return run_gpt_prompt_memo_on_convo(persona, all_utt)[0]
-
-
 
 
 def run_reflect(persona):
@@ -242,30 +239,4 @@ def reflect(persona):
       persona.a_mem.add_thought(created, expiration, s, p, o, 
                                 memo_thought, keywords, thought_poignancy, 
                                 thought_embedding_pair, evidence)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

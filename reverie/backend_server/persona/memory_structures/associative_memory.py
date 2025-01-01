@@ -26,21 +26,21 @@ class ConceptNode:
     self.node_count = node_count
     self.type_count = type_count
     self.type = node_type # thought / event / chat
-    self.depth = depth
+    self.depth = depth ### event / chat is 0, but thought is 1 or more
 
     self.created = created
     self.expiration = expiration
     self.last_accessed = self.created
 
-    self.subject = s
-    self.predicate = p
-    self.object = o
+    self.subject = s # 主语
+    self.predicate = p # 谓语
+    self.object = o # 宾语
 
     self.description = description
-    self.embedding_key = embedding_key
+    self.embedding_key = embedding_key ### description
     self.poignancy = poignancy
-    self.keywords = keywords
-    self.filling = filling
+    self.keywords = keywords ### thought / event is (subject & predicate & object main word) , chat is target_persona_name
+    self.filling = filling ### 在 thought 中 是一个list，存储了其他的 node_id； 在 chat 中时tuple()
 
 
   def spo_summary(self): 
@@ -162,20 +162,21 @@ class AssociativeMemory:
 
     # Node type specific clean up. 
     if "(" in description: 
-      description = (" ".join(description.split()[:3]) 
+      # 去除括号 ？？？
+      description = (" ".join(description.split()[:3])  # description.split() 按照 " " 空格进行分割
                      + " " 
-                     +  description.split("(")[-1][:-1])
+                     +  description.split("(")[-1][:-1]) # description.split() 按照 "(" 进行分割
 
     # Creating the <ConceptNode> object.
     node = ConceptNode(node_id, node_count, type_count, node_type, depth,
                        created, expiration, 
                        s, p, o, 
-                       description, embedding_pair[0], 
+                       description, embedding_pair[0], ### embedding_pair[0]: embedding_key
                        poignancy, keywords, filling)
 
     # Creating various dictionary cache for fast access. 
-    self.seq_event[0:0] = [node]
-    keywords = [i.lower() for i in keywords]
+    self.seq_event[0:0] = [node] ### 表示将 node 插入到 seq_event 的开头，而不移除现有的元素
+    keywords = [i.lower() for i in keywords] ### the type of keywords is set ### i.lower()转换为小写字母形式
     for kw in keywords: 
       if kw in self.kw_to_event: 
         self.kw_to_event[kw][0:0] = [node]
@@ -205,6 +206,8 @@ class AssociativeMemory:
     node_type = "thought"
     node_id = f"node_{str(node_count)}"
     depth = 1 
+
+    ### 用来表示该 depth of thought, 该 thought 在reflection 时是否由其他的thought 而来  
     try: 
       if filling: 
         depth += max([self.id_to_node[i].depth for i in filling])
@@ -306,7 +309,8 @@ class AssociativeMemory:
     contents = [s_content, p_content, o_content]
 
     ret = []
-    for i in contents: 
+    for i in contents:
+      ### if i.lower() in self.kw_to_thought:  为什么这里不使用lower()??? 
       if i in self.kw_to_thought: 
         ret += self.kw_to_thought[i.lower()]
 

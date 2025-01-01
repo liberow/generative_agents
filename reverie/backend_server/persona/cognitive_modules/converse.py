@@ -123,6 +123,7 @@ def generate_one_utterance(maze, init_persona, target_persona, retrieved, curr_c
 
   return x["utterance"], x["end"]
 
+
 def agent_chat_v2(maze, init_persona, target_persona): 
   curr_chat = []
   print ("July 23")
@@ -179,10 +180,6 @@ def agent_chat_v2(maze, init_persona, target_persona):
   return curr_chat
 
 
-
-
-
-
 def generate_summarize_ideas(persona, nodes, question): 
   statements = ""
   for n in nodes:
@@ -207,6 +204,7 @@ def generate_next_line(persona, interlocutor_desc, curr_convo, summarized_idea):
 def generate_inner_thought(persona, whisper):
   inner_thought = run_gpt_prompt_generate_whisper_inner_thought(persona, whisper)[0]
   return inner_thought
+
 
 def generate_action_event_triple(act_desp, persona): 
   """TODO 
@@ -289,35 +287,4 @@ def open_convo_session(persona, convo_mode):
     persona.a_mem.add_thought(created, expiration, s, p, o, 
                               thought, keywords, thought_poignancy, 
                               thought_embedding_pair, None)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

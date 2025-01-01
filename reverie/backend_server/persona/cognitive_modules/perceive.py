@@ -119,6 +119,9 @@ def perceive(persona, maze):
     # We retrieve the latest persona.scratch.retention events. If there is  
     # something new that is happening (that is, p_event not in latest_events),
     # then we add that event to the a_mem and return it. 
+    ### 感知事件时已经排除了基于空间的重复事件，但如果Agent一直站在当前Tile上，
+    ### 他还是会重复感知到当前Tile的事件，此时这些事件就是旧事件。
+    ### 而只有新事件才应该被记忆。
     latest_events = persona.a_mem.get_summarized_latest_events(
                                     persona.scratch.retention)
     if p_event not in latest_events:
@@ -179,19 +182,3 @@ def perceive(persona, maze):
       persona.scratch.importance_ele_n += 1
 
   return ret_events
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-

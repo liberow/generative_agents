@@ -49,9 +49,9 @@ class Scratch:
     self.concept_forget = 100
     self.daily_reflection_time = 60 * 3
     self.daily_reflection_size = 5
-    self.overlap_reflect_th = 2
-    self.kw_strg_event_reflect_th = 4
-    self.kw_strg_thought_reflect_th = 4
+    self.overlap_reflect_th = 2 ### 判断两个反思内容是否重复的阈值
+    self.kw_strg_event_reflect_th = 4  ### 定义事件和思维中关键词的权重阈值，用于筛选重要内容
+    self.kw_strg_thought_reflect_th = 4 
 
     # New reflection variables
     self.recency_w = 1
@@ -60,7 +60,7 @@ class Scratch:
     self.recency_decay = 0.99
     self.importance_trigger_max = 150
     self.importance_trigger_curr = self.importance_trigger_max
-    self.importance_ele_n = 0 
+    self.importance_ele_n = 0 ### 每次 reflect 时，只获取按照重要性的前 importance_ele_n 个元素，然后重置为 0
     self.thought_count = 5
 
     # PERSONA PLANNING 
@@ -100,7 +100,9 @@ class Scratch:
     # schedule. 
     # e.g., [['sleeping', 360], 
     #        ['wakes up and starts her morning routine', 120],
-    #        ['working on her painting', 240], ... ['going to bed', 60]]
+    #        ['working on her painting', 240], 
+    #        ... 
+    #        ['going to bed', 60]]
     self.f_daily_schedule_hourly_org = []
     
     # CURR ACTION 
@@ -451,7 +453,7 @@ class Scratch:
 
 
   def get_str_curr_date_str(self): 
-    return self.curr_time.strftime("%A %B %d")
+    return self.curr_time.strftime("%A %B %d") ### 星期全名，月份全名，两位数日期
 
 
   def get_curr_event(self):

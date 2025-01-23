@@ -6,12 +6,20 @@ Description: Wrapper functions for calling OpenAI APIs.
 """
 import json
 import random
-import openai
+# import openai
+import requests
 import time 
+import ollama 
 
 from utils import *
 
-openai.api_key = openai_api_key
+# openai.api_key = openai_api_key
+# openai.api_base = openai_base_url
+
+# Ollama API 配置
+OLLAMA_API_URL = "http://localhost:11434"
+MODEL = "llama3:latest"
+EMBEDDING_MODEL = "mxbai-embed-large:latest"
 
 def temp_sleep(seconds=0.1):
   time.sleep(seconds)
@@ -19,11 +27,17 @@ def temp_sleep(seconds=0.1):
 def ChatGPT_single_request(prompt): 
   temp_sleep()
 
-  completion = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo", 
-    messages=[{"role": "user", "content": prompt}]
+  # completion = openai.ChatCompletion.create(
+  #   model="gpt-3.5-turbo", 
+  #   messages=[{"role": "user", "content": prompt}]
+  # )
+  # return completion["choices"][0]["message"]["content"]
+  completion = ollama.chat(
+    model=MODEL,
+    messages=[{"role": "user", "content": prompt}],
   )
-  return completion["choices"][0]["message"]["content"]
+  return completion['message']['content']
+
 
 
 # ============================================================================
@@ -45,11 +59,16 @@ def GPT4_request(prompt):
   temp_sleep()
 
   try: 
-    completion = openai.ChatCompletion.create(
-    model="gpt-4", 
-    messages=[{"role": "user", "content": prompt}]
+    # completion = openai.ChatCompletion.create(
+    # model="gpt-4", 
+    # messages=[{"role": "user", "content": prompt}]
+    # )
+    # return completion["choices"][0]["message"]["content"]
+    completion = ollama.chat(
+    model=MODEL,
+    messages=[{"role": "user", "content": prompt}],
     )
-    return completion["choices"][0]["message"]["content"]
+    return completion['message']['content']
   
   except: 
     print ("ChatGPT ERROR")
@@ -70,11 +89,16 @@ def ChatGPT_request(prompt):
   """
   # temp_sleep()
   try: 
-    completion = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo", 
-    messages=[{"role": "user", "content": prompt}]
+    # completion = openai.ChatCompletion.create(
+    # model="gpt-3.5-turbo", 
+    # messages=[{"role": "user", "content": prompt}]
+    # )
+    # return completion["choices"][0]["message"]["content"]
+    completion = ollama.chat(
+    model=MODEL,
+    messages=[{"role": "user", "content": prompt}],
     )
-    return completion["choices"][0]["message"]["content"]
+    return completion['message']['content']
   
   except: 
     print ("ChatGPT ERROR")
@@ -208,17 +232,24 @@ def GPT_request(prompt, gpt_parameter):
   """
   temp_sleep()
   try: 
-    response = openai.Completion.create(
-                model=gpt_parameter["engine"],
-                prompt=prompt,
-                temperature=gpt_parameter["temperature"],
-                max_tokens=gpt_parameter["max_tokens"],
-                top_p=gpt_parameter["top_p"],
-                frequency_penalty=gpt_parameter["frequency_penalty"],
-                presence_penalty=gpt_parameter["presence_penalty"],
-                stream=gpt_parameter["stream"],
-                stop=gpt_parameter["stop"],)
-    return response.choices[0].text
+    # response = openai.Completion.create(
+    #             model=gpt_parameter["engine"],
+    #             prompt=prompt,
+    #             temperature=gpt_parameter["temperature"],
+    #             max_tokens=gpt_parameter["max_tokens"],
+    #             top_p=gpt_parameter["top_p"],
+    #             frequency_penalty=gpt_parameter["frequency_penalty"],
+    #             presence_penalty=gpt_parameter["presence_penalty"],
+    #             stream=gpt_parameter["stream"],
+    #             stop=gpt_parameter["stop"],)
+    # return response.choices[0].text
+
+    # 需要修改
+    completion = ollama.chat(
+    model=MODEL,
+    messages=[{"role": "user", "content": prompt}],
+    )
+    return completion['message']['content']    
   except: 
     print ("TOKEN LIMIT EXCEEDED")
     return "TOKEN LIMIT EXCEEDED"
@@ -273,16 +304,23 @@ def safe_generate_response(prompt,
   return fail_safe_response
 
 
-def get_embedding(text, model="text-embedding-ada-002"):
+# def get_embedding(text, model="text-embedding-ada-002"):
+#   text = text.replace("\n", " ")
+#   if not text: 
+#     text = "this is blank"
+#   return openai.Embedding.create(
+#           input=[text], model=model)['data'][0]['embedding']
+def get_embedding(text, model=EMBEDDING_MODEL):
   text = text.replace("\n", " ")
   if not text: 
     text = "this is blank"
-  return openai.Embedding.create(
-          input=[text], model=model)['data'][0]['embedding']
-
+  
+  response = ollama.embeddings(model=model, prompt=text)
+  embedding = response["embedding"]
+  return embedding
 
 if __name__ == '__main__':
-  gpt_parameter = {"engine": "text-davinci-003", "max_tokens": 50, 
+  gpt_parameter = {"engine": EMBEDDING_MODEL, "max_tokens": 50, 
                    "temperature": 0, "top_p": 1, "stream": False,
                    "frequency_penalty": 0, "presence_penalty": 0, 
                    "stop": ['"']}

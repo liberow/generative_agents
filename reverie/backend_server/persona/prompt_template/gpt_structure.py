@@ -6,20 +6,57 @@ Description: Wrapper functions for calling OpenAI APIs.
 """
 import json
 import random
-# import openai
+import openai
 import requests
 import time 
 import ollama 
 
 from utils import *
 
-# openai.api_key = openai_api_key
-# openai.api_base = openai_base_url
+openai.api_key = openai_api_key
+openai.api_base = openai_base_url
 
 # Ollama API 配置
 OLLAMA_API_URL = "http://localhost:11434"
-MODEL = "llama3:latest"
+# MODEL = "llama3:latest"
+MODEL = "deepseek/deepseek-chat"
 EMBEDDING_MODEL = "mxbai-embed-large:latest"
+
+def model_request(prompt, request_type="openrouter"):
+  if request_type == "openai":
+    completion = openai.ChatCompletion.create(
+      model="gpt-3.5-turbo", 
+      messages=[{"role": "user", "content": prompt}]
+    )
+    return completion["choices"][0]["message"]["content"]
+  elif request_type == "ollama":
+    completion = ollama.chat(
+      model=MODEL,
+      messages=[{"role": "user", "content": prompt}],
+    )
+    return completion['message']['content']  
+  elif request_type == "openrouter":
+    response = requests.post(
+      url=OPENROUTER_BASE_URL,
+      headers={
+        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+        # "HTTP-Referer": "<YOUR_SITE_URL>", # Optional. Site URL for rankings on openrouter.ai.
+        # "X-Title": "<YOUR_SITE_NAME>", # Optional. Site title for rankings on openrouter.ai.
+      },
+      data=json.dumps({
+        "model": MODEL, # Optional
+        "messages": [
+          {
+            "role": "user",
+            "content": prompt
+          }
+        ]
+        
+      })
+    )    
+    response_json = response.json()
+    return response_json["choices"][0]["message"]["content"]
+
 
 def temp_sleep(seconds=0.1):
   time.sleep(seconds)
@@ -32,12 +69,7 @@ def ChatGPT_single_request(prompt):
   #   messages=[{"role": "user", "content": prompt}]
   # )
   # return completion["choices"][0]["message"]["content"]
-  completion = ollama.chat(
-    model=MODEL,
-    messages=[{"role": "user", "content": prompt}],
-  )
-  return completion['message']['content']
-
+  return  model_request(prompt)
 
 
 # ============================================================================
@@ -64,11 +96,7 @@ def GPT4_request(prompt):
     # messages=[{"role": "user", "content": prompt}]
     # )
     # return completion["choices"][0]["message"]["content"]
-    completion = ollama.chat(
-    model=MODEL,
-    messages=[{"role": "user", "content": prompt}],
-    )
-    return completion['message']['content']
+    return  model_request(prompt) 
   
   except: 
     print ("ChatGPT ERROR")
@@ -94,11 +122,7 @@ def ChatGPT_request(prompt):
     # messages=[{"role": "user", "content": prompt}]
     # )
     # return completion["choices"][0]["message"]["content"]
-    completion = ollama.chat(
-    model=MODEL,
-    messages=[{"role": "user", "content": prompt}],
-    )
-    return completion['message']['content']
+    return  model_request(prompt) 
   
   except: 
     print ("ChatGPT ERROR")
@@ -318,6 +342,8 @@ def get_embedding(text, model=EMBEDDING_MODEL):
   response = ollama.embeddings(model=model, prompt=text)
   embedding = response["embedding"]
   return embedding
+
+###############################__main__###############################
 
 if __name__ == '__main__':
   gpt_parameter = {"engine": EMBEDDING_MODEL, "max_tokens": 50, 

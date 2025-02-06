@@ -10,52 +10,78 @@ import openai
 import requests
 import time 
 import ollama 
+import traceback
 
 from utils import *
 
 openai.api_key = openai_api_key
 openai.api_base = openai_base_url
 
-# Ollama API 配置
-OLLAMA_API_URL = "http://localhost:11434"
-# MODEL = "llama3:latest"
-MODEL = "deepseek/deepseek-chat"
+MODEL = "deepseek/deepseek-chat" # DeepSeek-V3
 EMBEDDING_MODEL = "mxbai-embed-large:latest"
 
 def model_request(prompt, request_type="openrouter"):
-  if request_type == "openai":
-    completion = openai.ChatCompletion.create(
-      model="gpt-3.5-turbo", 
-      messages=[{"role": "user", "content": prompt}]
-    )
-    return completion["choices"][0]["message"]["content"]
-  elif request_type == "ollama":
-    completion = ollama.chat(
-      model=MODEL,
-      messages=[{"role": "user", "content": prompt}],
-    )
-    return completion['message']['content']  
-  elif request_type == "openrouter":
-    response = requests.post(
-      url=OPENROUTER_BASE_URL,
-      headers={
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-        # "HTTP-Referer": "<YOUR_SITE_URL>", # Optional. Site URL for rankings on openrouter.ai.
-        # "X-Title": "<YOUR_SITE_NAME>", # Optional. Site title for rankings on openrouter.ai.
-      },
-      data=json.dumps({
-        "model": MODEL, # Optional
-        "messages": [
-          {
-            "role": "user",
-            "content": prompt
-          }
-        ]
+    try:
+        if request_type == "openai":
+            try:
+                completion = openai.ChatCompletion.create(
+                    model="gpt-3.5-turbo",
+                    messages=[{"role": "user", "content": prompt}]
+                )
+                # return completion["choices"][0]["message"]["content"]
+                return completion.get("choices", [{}])[0].get("message", {}).get("content", "No content returned from OpenRouter.")
+            except openai.error.OpenAIError as e:
+                return f"OpenAI API error: {str(e)}"
         
-      })
-    )    
-    response_json = response.json()
-    return response_json["choices"][0]["message"]["content"]
+        elif request_type == "ollama":
+            try:
+                completion = ollama.chat(
+                    model=MODEL,
+                    messages=[{"role": "user", "content": prompt}]
+                )
+                # return completion['message']['content']               
+                return completion.get("message", {}).get("content", "No content returned from Ollama.")
+
+            except Exception as e:
+                return f"Ollama API error: {str(e)}"
+        
+        elif request_type == "openrouter":
+            try:
+                response = requests.post(
+                    url=OPENROUTER_BASE_URL,
+                    headers={
+                        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                        # "HTTP-Referer": "<YOUR_SITE_URL>", # 可选
+                        # "X-Title": "<YOUR_SITE_NAME>", # 可选
+                    },
+                    data=json.dumps({
+                        "model": MODEL,  # 可选
+                        "messages": [{"role": "user", "content": prompt}]
+                    }),
+                    # timeout=10  # 设置超时时间，防止长时间无响应
+                )
+
+                if response.status_code != 200:
+                    return f"OpenRouter API error: HTTP {response.status_code}, {response.text}"
+                
+                # 尝试解析 JSON
+                try:
+                    response_json = response.json()
+                except json.JSONDecodeError:
+                    return "OpenRouter API error: Failed to parse JSON response."
+
+                # 确保 response_json 结构正确
+                # return response_json["choices"][0]["message"]["content"]
+                return response_json.get("choices", [{}])[0].get("message", {}).get("content", "No content returned from OpenRouter.")
+
+            except requests.exceptions.RequestException as e:
+                return f"OpenRouter API error: {str(e)}"
+        
+        else:
+            return f"Error: Unsupported request_type '{request_type}'. Choose from 'openai', 'ollama', or 'openrouter'."
+    
+    except Exception as e:
+        return f"Unexpected error: {str(e)}"
 
 
 def temp_sleep(seconds=0.1):
@@ -267,16 +293,13 @@ def GPT_request(prompt, gpt_parameter):
     #             stream=gpt_parameter["stream"],
     #             stop=gpt_parameter["stop"],)
     # return response.choices[0].text
-
-    # 需要修改
-    completion = ollama.chat(
-    model=MODEL,
-    messages=[{"role": "user", "content": prompt}],
-    )
-    return completion['message']['content']    
-  except: 
-    print ("TOKEN LIMIT EXCEEDED")
+    return  model_request(prompt)
+  except Exception as e: 
+    # print ("TOKEN LIMIT EXCEEDED")
+    error_message = f"Error: {str(e)}\n{traceback.format_exc()}"
+    print(error_message)    
     return "TOKEN LIMIT EXCEEDED"
+  
 
 
 def generate_prompt(curr_input, prompt_lib_file): 
@@ -339,7 +362,7 @@ def get_embedding(text, model=EMBEDDING_MODEL):
   if not text: 
     text = "this is blank"
   
-  response = ollama.embeddings(model=model, prompt=text)
+  response = ollama.embeddings(model=model, prompt=text, options={"base_url": OLLAMA_API_URL})
   embedding = response["embedding"]
   return embedding
 

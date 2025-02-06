@@ -24,12 +24,12 @@ from translator import views as translator_views
 urlpatterns = [
     url(r'^$', translator_views.landing, name='landing'),
     url(r'^simulator_home$', translator_views.home, name='home'),
-    url(r'^demo/(?P<sim_code>[\w-]+)/(?P<step>[\w-]+)/(?P<play_speed>[\w-]+)/$', translator_views.demo, name='demo'),
-    url(r'^replay/(?P<sim_code>[\w-]+)/(?P<step>[\w-]+)/$', translator_views.replay, name='replay'),
-    url(r'^replay_persona_state/(?P<sim_code>[\w-]+)/(?P<step>[\w-]+)/(?P<persona_name>[\w-]+)/$', translator_views.replay_persona_state, name='replay_persona_state'),
+    url(r'^demo/(?P<sim_code>[\w-]+)/(?P<step>[\w-]+)/(?P<play_speed>[\w-]+)/$', translator_views.demo, name='demo'), # 匹配类似/demo/sim123/step1/normal/的路径。
+    url(r'^replay/(?P<sim_code>[\w-]+)/(?P<step>[\w-]+)/$', translator_views.replay, name='replay'), # 匹配类似/replay/sim123/step1/的路径。
+    url(r'^replay_persona_state/(?P<sim_code>[\w-]+)/(?P<step>[\w-]+)/(?P<persona_name>[\w-]+)/$', translator_views.replay_persona_state, name='replay_persona_state'), # 匹配类似/replay_persona_state/sim123/step1/john/的路径。
     url(r'^process_environment/$', translator_views.process_environment, name='process_environment'),
     url(r'^update_environment/$', translator_views.update_environment, name='update_environment'),
     url(r'^path_tester/$', translator_views.path_tester, name='path_tester'),
     url(r'^path_tester_update/$', translator_views.path_tester_update, name='path_tester_update'),
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls), # 将/admin/路径映射到Django的管理后台。
 ]

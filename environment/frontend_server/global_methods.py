@@ -180,7 +180,7 @@ def find_filenames(path_to_dir, suffix=".csv"):
   RETURNS: 
     A list of paths to all files in the directory. 
   """
-  filenames = listdir(path_to_dir)
+  filenames = listdir(path_to_dir) # 不会递归地查找，只会返回直接目录或者文件
   return [ path_to_dir+"/"+filename 
            for filename in filenames if filename.endswith( suffix ) ]
 

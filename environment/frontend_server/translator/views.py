@@ -157,7 +157,7 @@ def replay(request, sim_code, step):
   persona_names_set = set()
   for i in find_filenames(f"storage/{sim_code}/personas", ""): 
     x = i.split("/")[-1].strip()
-    if x[0] != ".": 
+    if x[0] != ".": # 过滤掉以.开头的隐藏文件。
       persona_names += [[x, x.replace(" ", "_")]]
       persona_names_set.add(x)
 

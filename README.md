@@ -30,9 +30,18 @@ collision_block_id = "32125"
 
 # Verbose 
 debug = True
+
+# OpenRouter configuration
+OPENROUTER_API_KEY = "sk-or-v1-xxxxx"
+# OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
+OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1/chat/completions"
+
+# Ollama API configuration
+OLLAMA_API_URL = ""
+
 ```
 Replace `<Your OpenAI API>` with your OpenAI API key, and `<name>` with your name.
- 
+
 ### Step 2. Install requirements.txt
 Install everything listed in the `requirements.txt` file (I strongly recommend first setting up a virtualenv as usual). A note on Python version: we tested our environment on Python 3.9.12. 
 

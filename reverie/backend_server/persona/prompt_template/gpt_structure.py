@@ -14,22 +14,34 @@ import traceback
 
 from utils import *
 
-openai.api_key = openai_api_key
-openai.api_base = openai_base_url
-
-MODEL = "deepseek/deepseek-chat" # DeepSeek-V3
-EMBEDDING_MODEL = "mxbai-embed-large:latest"
+# openai.api_key = openai_api_key
+# openai.api_base = openai_base_url
+# openai.api_key = DEEPSEEK_API_KEY
+# openai.api_base = DEEPSEEK_BASE_URL
+openai.api_key = OPENROUTER_API_KEY
+openai.api_base = OPENROUTER_BASE_URL
 
 def model_request(prompt, request_type="openrouter"):
     try:
-        if request_type == "openai":
+        if request_type == "deepseek":
+            try:
+                completion = openai.ChatCompletion.create(
+                    model=MODEL,
+                    messages=[{"role": "user", "content": prompt}],
+                    stream=False,
+                )
+                # return completion["choices"][0]["message"]["content"]
+                return completion.get("choices", [{}])[0].get("message", {}).get("content", "No content returned from DeepSeek.")
+            except openai.error.OpenAIError as e:
+                return f"DeepSeek API error: {str(e)}"           
+        elif request_type == "openai":
             try:
                 completion = openai.ChatCompletion.create(
                     model="gpt-3.5-turbo",
                     messages=[{"role": "user", "content": prompt}]
                 )
                 # return completion["choices"][0]["message"]["content"]
-                return completion.get("choices", [{}])[0].get("message", {}).get("content", "No content returned from OpenRouter.")
+                return completion.get("choices", [{}])[0].get("message", {}).get("content", "No content returned from OpenAI.")
             except openai.error.OpenAIError as e:
                 return f"OpenAI API error: {str(e)}"
         
@@ -51,8 +63,6 @@ def model_request(prompt, request_type="openrouter"):
                     url=OPENROUTER_BASE_URL,
                     headers={
                         "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-                        # "HTTP-Referer": "<YOUR_SITE_URL>", # 可选
-                        # "X-Title": "<YOUR_SITE_NAME>", # 可选
                     },
                     data=json.dumps({
                         "model": MODEL,  # 可选
@@ -70,9 +80,14 @@ def model_request(prompt, request_type="openrouter"):
                 except json.JSONDecodeError:
                     return "OpenRouter API error: Failed to parse JSON response."
 
-                # 确保 response_json 结构正确
-                # return response_json["choices"][0]["message"]["content"]
-                return response_json.get("choices", [{}])[0].get("message", {}).get("content", "No content returned from OpenRouter.")
+                if "error" in response_json:
+                    # 如果 response_json 中包含 "error" 键，则处理错误消息
+                    error_message = response_json["error"]["message"]
+                    print(f"Error occurred: {error_message}")
+                    return error_message
+                else:
+                    # 如果没有错误，则正常处理返回的内容
+                    return response_json["choices"][0]["message"]["content"]
 
             except requests.exceptions.RequestException as e:
                 return f"OpenRouter API error: {str(e)}"
@@ -84,18 +99,19 @@ def model_request(prompt, request_type="openrouter"):
         return f"Unexpected error: {str(e)}"
 
 
-def temp_sleep(seconds=0.1):
+def temp_sleep(seconds=0.2):
   time.sleep(seconds)
 
 def ChatGPT_single_request(prompt): 
   temp_sleep()
 
-  # completion = openai.ChatCompletion.create(
-  #   model="gpt-3.5-turbo", 
-  #   messages=[{"role": "user", "content": prompt}]
-  # )
-  # return completion["choices"][0]["message"]["content"]
-  return  model_request(prompt)
+  completion = openai.ChatCompletion.create(
+    # model="gpt-3.5-turbo", 
+    model=MODEL,
+    messages=[{"role": "user", "content": prompt}]
+  )
+  return completion["choices"][0]["message"]["content"]
+  # return  model_request(prompt)
 
 
 # ============================================================================
@@ -117,12 +133,13 @@ def GPT4_request(prompt):
   temp_sleep()
 
   try: 
-    # completion = openai.ChatCompletion.create(
+    completion = openai.ChatCompletion.create(
     # model="gpt-4", 
-    # messages=[{"role": "user", "content": prompt}]
-    # )
-    # return completion["choices"][0]["message"]["content"]
-    return  model_request(prompt) 
+    model=MODEL,
+    messages=[{"role": "user", "content": prompt}]
+    )
+    return completion["choices"][0]["message"]["content"]
+    # return  model_request(prompt) 
   
   except: 
     print ("ChatGPT ERROR")
@@ -143,12 +160,13 @@ def ChatGPT_request(prompt):
   """
   # temp_sleep()
   try: 
-    # completion = openai.ChatCompletion.create(
+    completion = openai.ChatCompletion.create(
     # model="gpt-3.5-turbo", 
-    # messages=[{"role": "user", "content": prompt}]
-    # )
-    # return completion["choices"][0]["message"]["content"]
-    return  model_request(prompt) 
+    model=MODEL,
+    messages=[{"role": "user", "content": prompt}]
+    )
+    return completion["choices"][0]["message"]["content"]
+    # return  model_request(prompt) 
   
   except: 
     print ("ChatGPT ERROR")
@@ -163,7 +181,7 @@ def GPT4_safe_generate_response(prompt,
                                    func_validate=None,
                                    func_clean_up=None,
                                    verbose=False): 
-  prompt = 'GPT-3 Prompt:\n"""\n' + prompt + '\n"""\n'
+  prompt = 'DeepSeek Prompt:\n"""\n' + prompt + '\n"""\n'
   prompt += f"Output the response to the prompt above in json. {special_instruction}\n"
   prompt += "Example output json:\n"
   prompt += '{"output": "' + str(example_output) + '"}'
@@ -202,7 +220,7 @@ def ChatGPT_safe_generate_response(prompt,
                                    func_validate=None,
                                    func_clean_up=None,
                                    verbose=False): 
-  # prompt = 'GPT-3 Prompt:\n"""\n' + prompt + '\n"""\n'
+  # prompt = 'Prompt:\n"""\n' + prompt + '\n"""\n'
   prompt = '"""\n' + prompt + '\n"""\n'
   prompt += f"Output the response to the prompt above in json. {special_instruction}\n"
   prompt += "Example output json:\n"
@@ -268,38 +286,45 @@ def ChatGPT_safe_generate_response_OLD(prompt,
 # ###################[SECTION 2: ORIGINAL GPT-3 STRUCTURE] ###################
 # ============================================================================
 
-def GPT_request(prompt, gpt_parameter): 
-  """
-  Given a prompt and a dictionary of GPT parameters, make a request to OpenAI
-  server and returns the response. 
-  ARGS:
-    prompt: a str prompt
-    gpt_parameter: a python dictionary with the keys indicating the names of  
-                   the parameter and the values indicating the parameter 
-                   values.   
-  RETURNS: 
-    a str of GPT-3's response. 
-  """
-  temp_sleep()
-  try: 
-    # response = openai.Completion.create(
-    #             model=gpt_parameter["engine"],
-    #             prompt=prompt,
-    #             temperature=gpt_parameter["temperature"],
-    #             max_tokens=gpt_parameter["max_tokens"],
-    #             top_p=gpt_parameter["top_p"],
-    #             frequency_penalty=gpt_parameter["frequency_penalty"],
-    #             presence_penalty=gpt_parameter["presence_penalty"],
-    #             stream=gpt_parameter["stream"],
-    #             stop=gpt_parameter["stop"],)
-    # return response.choices[0].text
-    return  model_request(prompt)
-  except Exception as e: 
-    # print ("TOKEN LIMIT EXCEEDED")
-    error_message = f"Error: {str(e)}\n{traceback.format_exc()}"
-    print(error_message)    
-    return "TOKEN LIMIT EXCEEDED"
-  
+def GPT_request(prompt, gpt_parameter):
+    """
+    Given a prompt and a dictionary of GPT parameters, make a request to OpenAI
+    server and returns the response. 
+    ARGS:
+        prompt: a str prompt
+        gpt_parameter: a python dictionary with the keys indicating the names of  
+                       the parameter and the values indicating the parameter 
+                       values.   
+    RETURNS: 
+        a str of GPT-3's response. 
+    """
+    temp_sleep()
+    try: 
+        response = openai.Completion.create(
+            model=gpt_parameter["engine"],
+            prompt=prompt,
+            temperature=gpt_parameter["temperature"],
+            max_tokens=gpt_parameter["max_tokens"],
+            top_p=gpt_parameter["top_p"],
+            frequency_penalty=gpt_parameter["frequency_penalty"],
+            presence_penalty=gpt_parameter["presence_penalty"],
+            stream=gpt_parameter["stream"],
+            stop=gpt_parameter["stop"],
+        )
+        # Print the full response in the normal case
+        # print("######################################Response##########################################")
+        # print("Full Response:", response)
+        # print("######################################Response##########################################")
+        return response.choices[0].text
+    except Exception as e: 
+        # Print the exception and the response if available
+        print("######################################Response##########################################")        
+        print("Exception occurred:", e)
+        if 'response' in locals():
+            print("Full Response:", response)
+        print("######################################Response##########################################")            
+        return "TOKEN LIMIT EXCEEDED"
+
 
 
 def generate_prompt(curr_input, prompt_lib_file): 
@@ -361,15 +386,15 @@ def get_embedding(text, model=EMBEDDING_MODEL):
   text = text.replace("\n", " ")
   if not text: 
     text = "this is blank"
-  
-  response = ollama.embeddings(model=model, prompt=text, options={"base_url": OLLAMA_API_URL})
+  # response = ollama.embeddings(model=model, prompt=text, options={"base_url": OLLAMA_API_URL})  
+  response = ollama.embeddings(model=model, prompt=text)
   embedding = response["embedding"]
   return embedding
 
 ###############################__main__###############################
 
 if __name__ == '__main__':
-  gpt_parameter = {"engine": EMBEDDING_MODEL, "max_tokens": 50, 
+  gpt_parameter = {"engine": MODEL, "max_tokens": 50, 
                    "temperature": 0, "top_p": 1, "stream": False,
                    "frequency_penalty": 0, "presence_penalty": 0, 
                    "stop": ['"']}

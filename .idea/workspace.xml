@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="51a4c7aa-6999-4c37-a682-f8ac06995bd1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_00/environment/0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_00/personas/Isabella Rodriguez/bootstrap_memory/associative_memory/embeddings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_00/personas/Isabella Rodriguez/bootstrap_memory/associative_memory/kw_strength.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_00/personas/Isabella Rodriguez/bootstrap_memory/associative_memory/nodes.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_00/personas/Isabella Rodriguez/bootstrap_memory/scratch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_00/personas/Isabella Rodriguez/bootstrap_memory/spatial_memory.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_00/personas/Klaus Mueller/bootstrap_memory/associative_memory/embeddings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_00/personas/Klaus Mueller/bootstrap_memory/associative_memory/kw_strength.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_00/personas/Klaus Mueller/bootstrap_memory/associative_memory/nodes.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_00/personas/Klaus Mueller/bootstrap_memory/scratch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_00/personas/Klaus Mueller/bootstrap_memory/spatial_memory.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_00/personas/Maria Lopez/bootstrap_memory/associative_memory/embeddings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_00/personas/Maria Lopez/bootstrap_memory/associative_memory/kw_strength.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_00/personas/Maria Lopez/bootstrap_memory/associative_memory/nodes.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_00/personas/Maria Lopez/bootstrap_memory/scratch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_00/personas/Maria Lopez/bootstrap_memory/spatial_memory.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_00/reverie/meta.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_01/environment/0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_01/personas/Isabella Rodriguez/bootstrap_memory/associative_memory/embeddings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_01/personas/Isabella Rodriguez/bootstrap_memory/associative_memory/kw_strength.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_01/personas/Isabella Rodriguez/bootstrap_memory/associative_memory/nodes.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_01/personas/Isabella Rodriguez/bootstrap_memory/scratch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_01/personas/Isabella Rodriguez/bootstrap_memory/spatial_memory.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_01/personas/Klaus Mueller/bootstrap_memory/associative_memory/embeddings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_01/personas/Klaus Mueller/bootstrap_memory/associative_memory/kw_strength.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_01/personas/Klaus Mueller/bootstrap_memory/associative_memory/nodes.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_01/personas/Klaus Mueller/bootstrap_memory/scratch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_01/personas/Klaus Mueller/bootstrap_memory/spatial_memory.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_01/personas/Maria Lopez/bootstrap_memory/associative_memory/embeddings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_01/personas/Maria Lopez/bootstrap_memory/associative_memory/kw_strength.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_01/personas/Maria Lopez/bootstrap_memory/associative_memory/nodes.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_01/personas/Maria Lopez/bootstrap_memory/scratch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_01/personas/Maria Lopez/bootstrap_memory/spatial_memory.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_01/reverie/meta.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_02/environment/0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_02/personas/Isabella Rodriguez/bootstrap_memory/associative_memory/embeddings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_02/personas/Isabella Rodriguez/bootstrap_memory/associative_memory/kw_strength.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_02/personas/Isabella Rodriguez/bootstrap_memory/associative_memory/nodes.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_02/personas/Isabella Rodriguez/bootstrap_memory/scratch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_02/personas/Isabella Rodriguez/bootstrap_memory/spatial_memory.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_02/personas/Klaus Mueller/bootstrap_memory/associative_memory/embeddings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_02/personas/Klaus Mueller/bootstrap_memory/associative_memory/kw_strength.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_02/personas/Klaus Mueller/bootstrap_memory/associative_memory/nodes.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_02/personas/Klaus Mueller/bootstrap_memory/scratch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_02/personas/Klaus Mueller/bootstrap_memory/spatial_memory.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_02/personas/Maria Lopez/bootstrap_memory/associative_memory/embeddings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_02/personas/Maria Lopez/bootstrap_memory/associative_memory/kw_strength.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_02/personas/Maria Lopez/bootstrap_memory/associative_memory/nodes.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_02/personas/Maria Lopez/bootstrap_memory/scratch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_02/personas/Maria Lopez/bootstrap_memory/spatial_memory.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/storage/simulation_n3_02/reverie/meta.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/temp_storage/curr_sim_code.json" beforeDir="false" afterPath="$PROJECT_DIR$/environment/frontend_server/temp_storage/curr_sim_code.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/frontend_server/temp_storage/curr_step.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reverie/backend_server/persona/prompt_template/defunct_run_gpt_prompt.py" beforeDir="false" afterPath="$PROJECT_DIR$/reverie/backend_server/persona/prompt_template/defunct_run_gpt_prompt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reverie/backend_server/persona/prompt_template/gpt_structure.py" beforeDir="false" afterPath="$PROJECT_DIR$/reverie/backend_server/persona/prompt_template/gpt_structure.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reverie/backend_server/persona/prompt_template/run_gpt_prompt.py" beforeDir="false" afterPath="$PROJECT_DIR$/reverie/backend_server/persona/prompt_template/run_gpt_prompt.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "liberow"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:web3-liber/generative_agents.git",
+    "accountId": "c8cb46be-10d1-4823-a695-a7c3f1f1685f"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2shOVXmdWNvUsmkhJJOedJX3xYd" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/liber/agent/generative_agents",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "settings.editor.splitter.proportion": "0.49951783",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="generative_agents" type="Python.DjangoServer" factoryName="Django server">
+      <module name="generative_agents" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="localhost" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PY-242.23339.19" />
+        <option value="bundled-python-sdk-0029f7779945-399fe30bd8c1-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.23339.19" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="51a4c7aa-6999-4c37-a682-f8ac06995bd1" name="Changes" comment="" />
+      <created>1738904364900</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1738904364900</updated>
+      <workItem from="1738904366089" duration="4238000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
